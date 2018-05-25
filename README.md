@@ -16,8 +16,8 @@ java 学习专用
        <td> IOC </td>
        <td> 2018-05-25 </td>
        <td> 2018-05-26 </td>
-       <td> <img src="./img/zw.jpg" width = "80" height = "80" align=center /> </td>
-       <td> <img src="./img/mw.jpg" width = "80" height = "80" align=center /> </td>
+       <td> <img src="./img/zw.jpg" width = "50" height = "50" align=center /> </td>
+       <td> <img src="./img/mw.jpg" width = "50" height = "50" align=center /> </td>
    </tr>
 </table>
 
