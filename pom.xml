@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>p0-java-base</module>
+        <module>p2-java-thread</module>
     </modules>
 
     <packaging>pom</packaging>
