@@ -9,6 +9,7 @@
     <modules>
         <module>p0-java-base</module>
         <module>p2-java-thread</module>
+        <module>p7-java-leetcode</module>
     </modules>
 
     <packaging>pom</packaging>
