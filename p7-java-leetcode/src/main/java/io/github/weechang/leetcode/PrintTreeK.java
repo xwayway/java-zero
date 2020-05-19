@@ -64,11 +64,26 @@ public class PrintTreeK {
         Node n3ll = new Node(6);
         n2r.left = n3ll;
         int k = 3;
-        printK(root, k);
+        printK(root, 7);
     }
 
     public static void printK(Node root, int k) {
+        if (root == null || k < 0) {
+            return;
+        }
+        printK(root, k, 0);
+    }
 
+    public static void printK(Node root, int k, int count) {
+        if (root == null) {
+            return;
+        }
+        if (k == count) {
+            System.out.println(root.val);
+        } else {
+            printK(root.left, k, count + 1);
+            printK(root.right, k, count + 1);
+        }
     }
 
 }

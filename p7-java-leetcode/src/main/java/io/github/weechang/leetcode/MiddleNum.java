@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
 public class MiddleNum {
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3};
+        int[] arr = {1, 2, 5, 4, 3, 4, 3};
         System.out.println(middle(arr));
     }
 
@@ -21,14 +21,18 @@ public class MiddleNum {
         if (arr == null || arr.length == 0 || (arr.length & 1) == 0) {
             return null;
         }
-        Comparator<Integer> descComparator = new Comparator<Integer>() {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>( new Comparator<Integer>() {
             @Override
             public int compare(Integer e1, Integer e2) {
                 return e1 - e2;
             }
-        };
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>(descComparator);
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(descComparator);
+        });
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>( new Comparator<Integer>() {
+            @Override
+            public int compare(Integer e1, Integer e2) {
+                return e1 - e2;
+            }
+        });
         for (int item : arr) {
             if (maxHeap.size() == 0) {
                 maxHeap.add(item);
