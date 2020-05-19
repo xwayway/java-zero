@@ -1,9 +1,11 @@
 package io.github.weechang.leetcode;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 /**
- *  一千万个数求最大的100个数
+ * 一千万个数求最大的100个数
  *
  * @author zhangwei
  * date 2020/5/15
@@ -12,18 +14,51 @@ import java.util.TreeMap;
 public class TopK {
 
     public static void main(String[] args) {
-        int[] a = new int[10000000];
+        int[] a = new int[10000];
         int n = 100;
         for (int i = 0; i < a.length; i++) {
             a[i] = i;
         }
-        int[] topk = topk(a, n);
+        int[] topk = topkQueue(a, n);
         for (int i = 0; i < topk.length; i++) {
             System.out.println(topk[i]);
         }
     }
 
-    public static int[] topk(int[] source, int n) {
+    public static int[] topkQueue(int[] source, int n) {
+        if (source == null || source.length == 0 || n <= 0) {
+            return null;
+        }
+        int len = source.length;
+        n = Math.min(len, n);
+        int[] topk = new int[n];
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+        for (int i = 0; i < len; i++) {
+            int temp = source[i];
+            if (i < n) {
+                queue.add(temp);
+            } else {
+                int min = queue.peek();
+                if (min < temp) {
+                    queue.poll();
+                    queue.add(temp);
+                }
+            }
+        }
+        int i = n - 1;
+        while (queue.size() > 0) {
+            topk[i] = queue.poll();
+            i--;
+        }
+        return topk;
+    }
+
+    public static int[] topkMap(int[] source, int n) {
         if (source == null || source.length == 0 || n <= 0) {
             return null;
         }

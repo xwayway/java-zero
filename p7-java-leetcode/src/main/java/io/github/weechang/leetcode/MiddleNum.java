@@ -1,5 +1,8 @@
 package io.github.weechang.leetcode;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * 求中位数
  *
@@ -11,24 +14,48 @@ public class MiddleNum {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 3};
-        int low = 0;
-        int high = arr.length - 1;
-        System.out.println(middle(arr, low, high));
+        System.out.println(middle(arr));
     }
 
-    public static int middle(int[] arr, int low, int high) {
-        int tmp = arr[low];
-        while (low < high) {
-            while (low < high && arr[high] >= tmp) {
-                high--;
-            }
-            arr[low] = arr[high];
-            while (low < high && arr[low] <= tmp) {
-                low++;
-            }
-            arr[high] = arr[low];
+    public static Integer middle(int[] arr) {
+        if (arr == null || arr.length == 0 || (arr.length & 1) == 0) {
+            return null;
         }
-        arr[low] = tmp;
-        return tmp;
+        Comparator<Integer> descComparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer e1, Integer e2) {
+                return e1 - e2;
+            }
+        };
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(descComparator);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(descComparator);
+        for (int item : arr) {
+            if (maxHeap.size() == 0) {
+                maxHeap.add(item);
+                continue;
+            }
+            if (maxHeap.size() == minHeap.size()) {
+                if (item < maxHeap.peek()) {
+                    maxHeap.add(item);
+                } else {
+                    minHeap.add(item);
+                }
+            } else if (maxHeap.size() < minHeap.size()) {
+                if (item < maxHeap.peek()) {
+                    maxHeap.add(item);
+                } else {
+                    maxHeap.add(minHeap.poll());
+                    minHeap.add(item);
+                }
+            } else {
+                minHeap.add(maxHeap.poll());
+                maxHeap.add(item);
+            }
+        }
+        if (minHeap.size() > maxHeap.size()) {
+            return minHeap.peek();
+        } else {
+            return maxHeap.peek();
+        }
     }
 }
