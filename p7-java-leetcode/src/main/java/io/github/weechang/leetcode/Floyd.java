@@ -15,32 +15,41 @@ public class Floyd {
     public static int[][] path;
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        //顶点数
-        int vertex = 7;
-        //边数
-        int edge = 10;
+//        Scanner input = new Scanner(System.in);
+//        //顶点数
+//        int vertex = 7;
+//        //边数
+//        int edge = 10;
+//
+//        int[][] matrix = new int[vertex][vertex];
+//        //初始化邻接矩阵
+//        for (int i = 0; i < vertex; i++) {
+//            for (int j = 0; j < vertex; j++) {
+//                matrix[i][j] = MaxValue;
+//            }
+//        }
+//
+//        //初始化路径数组
+//        path = new int[matrix.length][matrix.length];
+//
+//        //初始化边权值
+//        for (int i = 0; i < edge; i++) {
+//            System.out.println("请输入第" + (i + 1) + "条边与其权值:");
+//            int source = input.nextInt();
+//            int target = input.nextInt();
+//            int weight = input.nextInt();
+//            matrix[source][target] = weight;
+//        }
 
-        int[][] matrix = new int[vertex][vertex];
-        //初始化邻接矩阵
-        for (int i = 0; i < vertex; i++) {
-            for (int j = 0; j < vertex; j++) {
-                matrix[i][j] = MaxValue;
-            }
-        }
+        int matrix[][] = {
+                {0, 1, 3, 6},
+                {1, 0, MaxValue, 6},
+                {3, MaxValue, 0, 2},
+                {6, 6, 2, 0}
+        };
 
         //初始化路径数组
         path = new int[matrix.length][matrix.length];
-
-        //初始化边权值
-        for (int i = 0; i < edge; i++) {
-            System.out.println("请输入第" + (i + 1) + "条边与其权值:");
-            int source = input.nextInt();
-            int target = input.nextInt();
-            int weight = input.nextInt();
-            matrix[source][target] = weight;
-        }
-
         //调用算法计算最短路径
         floyd(matrix);
     }
